@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>SECURE TERMINAL</title>
+
+<style>
+body {
+    background: black;
+    color: #00ff88;
+    font-family: monospace;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.box {
+    border: 1px solid #00ff88;
+    padding: 20px;
+    width: 300px;
+    margin: auto;
+}
+
+input {
+    background: black;
+    border: 1px solid #00ff88;
+    color: #00ff88;
+    padding: 10px;
+    width: 90%;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #00ff88;
+    border: none;
+    cursor: pointer;
+}
+
+#out {
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>WINDOWS SECURITY NODE</h1>
+<p>Enter access code</p>
+
+<div class="box">
+    <input id="code" placeholder="Base64 code...">
+    <button onclick="check()">DECODE</button>
+    <div id="out"></div>
+</div>
+
+<script>
+function check() {
+    let input = document.getElementById("code").value;
+
+    try {
+        let decoded = atob(input);
+
+        if(decoded === "Goran2011") {
+            document.getElementById("out").innerHTML = "ACCESS GRANTED ✔";
+        } else {
+            document.getElementById("out").innerHTML = "ACCESS DENIED ❌";
+        }
+    } catch(e) {
+        document.getElementById("out").innerHTML = "INVALID CODE";
+    }
+}
+</script>
+
+</body>
+</html>
