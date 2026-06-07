@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>SECURE TERMINAL</title>
+<title>Windows Secure Decoder</title>
 
 <style>
 body {
@@ -10,65 +10,84 @@ body {
     color: #00ff88;
     font-family: monospace;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 50px;
 }
 
 .box {
     border: 1px solid #00ff88;
     padding: 20px;
-    width: 300px;
+    width: 350px;
     margin: auto;
 }
 
 input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px;
     background: black;
     border: 1px solid #00ff88;
     color: #00ff88;
-    padding: 10px;
-    width: 90%;
 }
 
 button {
-    margin-top: 10px;
     padding: 10px;
+    margin-top: 10px;
     background: #00ff88;
     border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
-#out {
-    margin-top: 20px;
+h1 {
+    color: #00ff88;
 }
 </style>
 </head>
 
 <body>
 
-<h1>WINDOWS SECURITY NODE</h1>
-<p>Enter access code</p>
+<h1>WINDOWS SECURITY CORE</h1>
 
 <div class="box">
-    <input id="code" placeholder="Base64 code...">
-    <button onclick="check()">DECODE</button>
-    <div id="out"></div>
+    <h3>Jelszó → Kód</h3>
+    <input id="pass" placeholder="Írd be a jelszót">
+    <button onclick="encode()">Kódosítás</button>
+    <div id="out1"></div>
+</div>
+
+<br>
+
+<div class="box">
+    <h3>Kód → Jelszó</h3>
+    <input id="code" placeholder="Írd be a kódot">
+    <button onclick="decode()">Dekódolás</button>
+    <div id="out2"></div>
 </div>
 
 <script>
-function check() {
-    let input = document.getElementById("code").value;
+
+// Jelszó -> kód
+function encode() {
+    let pass = document.getElementById("pass").value;
+    let encoded = btoa(pass);
+    document.getElementById("out1").innerHTML =
+        "KÓD: " + encoded;
+}
+
+// Kód -> jelszó
+function decode() {
+    let code = document.getElementById("code").value;
 
     try {
-        let decoded = atob(input);
-
-        if(decoded === "Goran2011") {
-            document.getElementById("out").innerHTML = "ACCESS GRANTED ✔";
-        } else {
-            document.getElementById("out").innerHTML = "ACCESS DENIED ❌";
-        }
+        let decoded = atob(code);
+        document.getElementById("out2").innerHTML =
+            "JELSZÓ: " + decoded;
     } catch(e) {
-        document.getElementById("out").innerHTML = "INVALID CODE";
+        document.getElementById("out2").innerHTML =
+            "Hibás kód!";
     }
 }
+
 </script>
 
 </body>
